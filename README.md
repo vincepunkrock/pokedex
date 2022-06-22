@@ -1,4 +1,5 @@
 # Pokedex
+Pokedex app written in Angular using the https://pokeapi.co/ API.
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.0.2.
 
