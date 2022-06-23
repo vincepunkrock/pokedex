@@ -1,8 +1,13 @@
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { StoreModule } from '@ngrx/store';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+
+import { pokedexReducer } from './reducers/pokedex.reducer';
+import { pokemonsReducer } from './reducers/pokemons.reducer';
 
 @NgModule({
   declarations: [
@@ -10,7 +15,12 @@ import { AppComponent } from './app.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    StoreModule.forRoot({
+      pokedex: pokedexReducer,
+      pokemons: pokemonsReducer
+    }),
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
