@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { PageEvent } from '@angular/material/paginator';
 import { Pokemon } from '../models/pokemon.model';
 
 @Component({
@@ -9,10 +10,24 @@ import { Pokemon } from '../models/pokemon.model';
 export class PokemonListComponent implements OnInit {
 
   @Input() pokemons: ReadonlyArray<Pokemon> = [];
+  @Output() selected: EventEmitter<Pokemon> = new EventEmitter();
+
+  pageSize: number = 150;
+  pageIndex: number = 0;
+  length: number = 1154;
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  pageChanged(pageEvent: PageEvent) {
+    console.log(pageEvent);
+    this.pageIndex = pageEvent.pageIndex;
+  }
+
+  select(pokemon: Pokemon) {
+    this.selected.emit(pokemon);
   }
 
 }

@@ -1,3 +1,12 @@
-<h1>Pokedex</h1>
+<mat-toolbar>
+    <h1>
+        <img class="app-icon" src="../assets/images/favicon.png">
+        Pokedex</h1>
+</mat-toolbar>
 
-<app-pokemon-list [pokemons]="pokemons$ | async"></app-pokemon-list>
+<div class="container">
+    
+    <app-pokemon-list [pokemons]="(pokemons$ | async)!" (selected)="pokemonSelected($event)"></app-pokemon-list>
+    <app-pokemon-details></app-pokemon-details>
+
+</div>

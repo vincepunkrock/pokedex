@@ -1,1 +1,34 @@
-<p>pokemon-details works!</p>
+<div class="container">
+    <h2 class="capitalize">
+        {{(pokemon$ | async)!.name}}
+        <mat-spinner *ngIf="(pokemon$ | async)!.name && !(pokemon$ | async)?.details" class="spinner" diameter="20"></mat-spinner>
+        <mat-chip-list *ngIf="(pokemon$ | async)?.details">
+            <mat-chip *ngFor="let t of (pokemon$ | async)!.details!.types">{{t.type.name}}</mat-chip>
+        </mat-chip-list>
+    </h2>
+
+    <div *ngIf="(pokemon$ | async)?.details">
+        <img [src]="(pokemon$ | async)!.details!.sprites!.front_default">
+
+        <h3>Abilities <mat-spinner *ngIf="loading" class="spinner" diameter="20"></mat-spinner></h3>
+        <table *ngIf="abilities" mat-table [dataSource]="abilities">
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef> Name </th>
+                <td class="abilities-name-cell" mat-cell *matCellDef="let element"><b>{{element.name}}</b></td>
+            </ng-container>
+
+            <!-- Effect Column -->
+            <ng-container matColumnDef="effect_entries">
+                <th mat-header-cell *matHeaderCellDef> Effect </th>
+                <td mat-cell class="abilities-effect-cell" *matCellDef="let element"> {{element.effect_entries[1]?.effect??""}} </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+        </table>
+
+    </div>
+</div>

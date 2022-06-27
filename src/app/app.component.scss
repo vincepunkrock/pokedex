@@ -1,0 +1,23 @@
+.app-icon {
+    width: 40px;
+    vertical-align: middle;
+}
+
+.container {
+    display: flex;
+}
+
+app-pokemon-list {
+    display: block;
+    width: 33%;
+    min-width: 200px;
+    height: calc(100vh - 120px);
+    overflow: auto;
+}
+
+app-pokemon-details {
+    width: 67;
+    max-width: 67%;
+    height: calc(100vh - 120px);
+    overflow-y: auto;
+}

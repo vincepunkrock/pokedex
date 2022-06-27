@@ -1,3 +1,6 @@
-<div *ngFor="let pokemon of pokemons">
-  <p>{{pokemon.name}}</span>
+<div class="pokemon-list">
+  <mat-nav-list>
+    <mat-list-item class="pokemon-list-item" *ngFor="let pokemon of pokemons" (click)="select(pokemon)"> <span class="capitalize">{{pokemon.name}}</span> </mat-list-item>
+  </mat-nav-list>
+  <mat-paginator class="paginator" [pageSize]="pageSize" [pageIndex]="pageIndex" [length]="length" (page)="pageChanged($event)"></mat-paginator>
 </div>
