@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import * as PokedexActions from "../actions/pokedex.actions";
+import * as PokemonActions from "../actions/pokemon.actions";
 import { Pokemon } from '../models/pokemon.model';
 
 const initialState: Pokemon = {
@@ -8,7 +8,7 @@ const initialState: Pokemon = {
     details: undefined
 };
 
-export const pokedexReducer = createReducer(
+export const pokemonReducer = createReducer(
     initialState, 
-    on(PokedexActions.selectPokemon, (state, {pokemon}) => pokemon)
+    on(PokemonActions.selectPokemon, (state, {pokemon}) => pokemon)
 );

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { selectPokemons } from './selectors/pokemons.selectors';
 import { retrievedPokemonList } from './actions/pokemons.actions';
-import { selectPokemon } from './actions/pokedex.actions'
+import { selectPokemon } from './actions/pokemon.actions'
 import { PokeapiService } from './services/pokeapi.service';
 import { Pokemon } from './models/pokemon.model';
 
@@ -20,9 +20,15 @@ export class AppComponent {
   ) {}
 
   ngOnInit() {
+    this.loadPokemonList();
+  }
+
+  loadPokemonList(url?: string) {
     this.pokeapiService
-      .getPokemons(0)
-      .subscribe((pokemons) => this.store.dispatch(retrievedPokemonList({ pokemons })));
+    .getPokemons(url)
+    .subscribe((response) => {
+      this.store.dispatch(retrievedPokemonList({ pokemons: response.results }));
+    });
   }
 
   pokemonSelected(selectedPokemon: Pokemon) {
@@ -31,5 +37,14 @@ export class AppComponent {
       console.log(pokemon);
       this.store.dispatch(selectPokemon({ pokemon }));
     });
+  }
+
+  changedPage(change: number) {
+    if(change == 1) {
+      this.loadPokemonList();
+    }
+    else if(change == -1) {
+      this.loadPokemonList();
+    }
   }
 }

@@ -8,7 +8,7 @@ import { AppComponent } from './app.component';
 import { PokemonListComponent } from './pokemon-list/pokemon-list.component';
 import { PokemonDetailsComponent } from './pokemon-details/pokemon-details.component';
 
-import { pokedexReducer } from './reducers/pokedex.reducer';
+import { pokemonReducer } from './reducers/pokemon.reducer';
 import { pokemonsReducer } from './reducers/pokemons.reducer';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -18,6 +18,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatTableModule } from '@angular/material/table';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { AppState } from './app.state';
 
 @NgModule({
   declarations: [
@@ -28,8 +29,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    StoreModule.forRoot({
-      pokedex: pokedexReducer,
+    StoreModule.forRoot<AppState>({
+      pokemon: pokemonReducer,
       pokemons: pokemonsReducer
     }),
     HttpClientModule,

@@ -6,6 +6,7 @@ import { map } from 'rxjs/operators';
 import { AbilityDetails } from '../models/abilityDetails.model';
 import { Pokemon } from '../models/pokemon.model';
 import { PokemonDetails } from '../models/pokemonDetails.model';
+import { PokemonListResponse } from '../models/pokemonListResponse.model';
 
 @Injectable({
   providedIn: 'root'
@@ -14,12 +15,8 @@ export class PokeapiService {
 
   constructor(private http: HttpClient) {}
 
-  getPokemons(offset: number): Observable<Pokemon[]> {
-    return this.http
-      .get<{results: Pokemon[]}>(
-        `https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=150`
-      )
-      .pipe(map((result) => result.results || []));
+  getPokemons(url?: string): Observable<PokemonListResponse> {
+    return this.http.get<PokemonListResponse>(url || `https://pokeapi.co/api/v2/pokemon?offset=0&limit=150`);
   }
   
   getPokemonFromUrl(url: string): Observable<Pokemon> {

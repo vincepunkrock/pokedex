@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { forkJoin, Observable, of } from 'rxjs';
 import { AbilityDetails } from '../models/abilityDetails.model';
 import { Ability } from '../models/pokemonDetails.model';
-import { selectedPokemon } from '../selectors/pokedex.selectors';
+import { selectedPokemon } from '../selectors/pokemon.selectors';
 import { PokeapiService } from '../services/pokeapi.service';
 
 @Component({

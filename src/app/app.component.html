@@ -6,7 +6,7 @@
 
 <div class="container">
     
-    <app-pokemon-list [pokemons]="(pokemons$ | async)!" (selected)="pokemonSelected($event)"></app-pokemon-list>
+    <app-pokemon-list [pokemons]="(pokemons$ | async)!" (selected)="pokemonSelected($event)" (changedPage)="changedPage($event)"></app-pokemon-list>
     <app-pokemon-details></app-pokemon-details>
 
 </div>

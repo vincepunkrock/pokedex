@@ -11,6 +11,7 @@ export class PokemonListComponent implements OnInit {
 
   @Input() pokemons: ReadonlyArray<Pokemon> = [];
   @Output() selected: EventEmitter<Pokemon> = new EventEmitter();
+  @Output() changedPage: EventEmitter<number> = new EventEmitter();
 
   pageSize: number = 150;
   pageIndex: number = 0;
@@ -22,7 +23,7 @@ export class PokemonListComponent implements OnInit {
   }
 
   pageChanged(pageEvent: PageEvent) {
-    console.log(pageEvent);
+    this.changedPage.emit(this.pageIndex < pageEvent.pageIndex ? 1 : -1);
     this.pageIndex = pageEvent.pageIndex;
   }
 
