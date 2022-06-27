@@ -18,7 +18,9 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatTableModule } from '@angular/material/table';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatIconModule } from '@angular/material/icon';
 import { AppState } from './app.state';
+import { listReducer } from './reducers/list.reducer';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,8 @@ import { AppState } from './app.state';
     AppRoutingModule,
     StoreModule.forRoot<AppState>({
       pokemon: pokemonReducer,
-      pokemons: pokemonsReducer
+      pokemons: pokemonsReducer,
+      listState: listReducer
     }),
     HttpClientModule,
     BrowserAnimationsModule,
@@ -40,7 +43,8 @@ import { AppState } from './app.state';
     MatToolbarModule,
     MatChipsModule,
     MatTableModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]

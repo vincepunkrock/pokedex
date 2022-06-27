@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
+import { Store } from '@ngrx/store';
 import { Pokemon } from '../models/pokemon.model';
+import { getItemCount } from '../selectors/list.selectors';
 
 @Component({
   selector: 'app-pokemon-list',
@@ -15,9 +17,11 @@ export class PokemonListComponent implements OnInit {
 
   pageSize: number = 150;
   pageIndex: number = 0;
-  length: number = 1154;
+  itemCount$ = this.store.select(getItemCount);
 
-  constructor() { }
+  constructor(
+    private store: Store
+  ) { }
 
   ngOnInit(): void {
   }

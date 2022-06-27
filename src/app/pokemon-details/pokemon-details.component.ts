@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { forkJoin, Observable, of } from 'rxjs';
+import { forkJoin } from 'rxjs';
 import { AbilityDetails } from '../models/abilityDetails.model';
 import { Ability } from '../models/pokemonDetails.model';
 import { selectedPokemon } from '../selectors/pokemon.selectors';
@@ -19,6 +19,7 @@ export class PokemonDetailsComponent implements OnInit {
   displayedColumns = ['name', 'effect_entries'];
 
   loading: boolean = false;
+  showFront: boolean = true;
 
   constructor(
     private pokeapiService: PokeapiService,
@@ -38,6 +39,7 @@ export class PokemonDetailsComponent implements OnInit {
   loadAbilities(abilities: Ability[]) {
 
     this.loading = true;
+    this.abilities = [];
     forkJoin(
       abilities.map(a => this.pokeapiService.getAbilityFromUrl(a.ability.url))
     ).subscribe(res => {
@@ -46,6 +48,10 @@ export class PokemonDetailsComponent implements OnInit {
       this.loading = false;
     });
 
+  }
+
+  turnAround() {
+    this.showFront = !this.showFront;
   }
 
 }

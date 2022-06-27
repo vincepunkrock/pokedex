@@ -7,8 +7,16 @@
         </mat-chip-list>
     </h2>
 
+    <div *ngIf="!(pokemon$ | async)?.name">
+        <mat-icon>arrow_back</mat-icon>Please select a Pokemon from the list on the left.
+    </div>
+
     <div *ngIf="(pokemon$ | async)?.details">
-        <img [src]="(pokemon$ | async)!.details!.sprites!.front_default">
+        
+        <img class="pokemon-img" *ngIf="showFront" [src]="(pokemon$ | async)!.details!.sprites!.front_default">
+        <img class="pokemon-img" *ngIf="!showFront" [src]="(pokemon$ | async)!.details!.sprites!.back_default">
+        
+        <mat-icon (click)="turnAround()" title="Turn around">refresh</mat-icon>
 
         <h3>Abilities <mat-spinner *ngIf="loading" class="spinner" diameter="20"></mat-spinner></h3>
         <table *ngIf="abilities" mat-table [dataSource]="abilities">
