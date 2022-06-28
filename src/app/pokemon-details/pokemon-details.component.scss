@@ -4,6 +4,13 @@
     box-sizing: border-box;
 }
 
+.img-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100px;
+}
+
 .abilities-name-cell {
     width: 200px;
 }

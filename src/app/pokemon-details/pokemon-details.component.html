@@ -14,10 +14,15 @@
 
     <div *ngIf="(pokemon$ | async)?.details">
         
-        <img class="pokemon-img" *ngIf="showFront" [src]="(pokemon$ | async)!.details!.sprites!.front_default">
-        <img class="pokemon-img" *ngIf="!showFront" [src]="(pokemon$ | async)!.details!.sprites!.back_default">
+        <div class="img-div">
+            <img class="pokemon-img" *ngIf="showFront" [src]="(pokemon$ | async)!.details!.sprites!.front_default">
+            <img class="pokemon-img" *ngIf="!showFront" [src]="(pokemon$ | async)!.details!.sprites!.back_default">
+            <br>
+            <span>
+                <mat-icon (click)="rotate()" title="Rotate">360</mat-icon>
+            </span>
+        </div>
         
-        <mat-icon (click)="turnAround()" title="Turn around">refresh</mat-icon>
 
         <br><br>
         <h3>Abilities <mat-spinner *ngIf="loading" class="spinner" diameter="20"></mat-spinner></h3>

@@ -81,7 +81,7 @@ export class PokemonDetailsComponent implements OnInit {
     return evolutions;
   }
 
-  turnAround() {
+  rotate() {
     this.showFront = !this.showFront;
   }
 
