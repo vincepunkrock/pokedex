@@ -1,6 +1,7 @@
 <div class="container">
     <h2 class="capitalize">
         {{(pokemon$ | async)!.name}}
+        <mat-icon *ngIf="(pokemon$ | async)!.name" class="close-btn" (click)="close()">close</mat-icon>
         <mat-spinner *ngIf="(pokemon$ | async)!.name && !(pokemon$ | async)?.details" class="spinner" diameter="20"></mat-spinner>
         <mat-chip-list *ngIf="(pokemon$ | async)?.details">
             <mat-chip *ngFor="let t of (pokemon$ | async)!.details!.types">{{t.type.name}}</mat-chip>
@@ -18,6 +19,7 @@
         
         <mat-icon (click)="turnAround()" title="Turn around">refresh</mat-icon>
 
+        <br><br>
         <h3>Abilities <mat-spinner *ngIf="loading" class="spinner" diameter="20"></mat-spinner></h3>
         <table *ngIf="abilities" mat-table [dataSource]="abilities">
 
@@ -37,6 +39,12 @@
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
         </table>
+        <br><br>
+        <h3>Evolution Chain</h3>
+        <ol>
+            <li *ngFor="let evo of evolutions" (click)="select(evo)" class="capitalize" [class.current]="evo.name == (pokemon$ | async)!.name">{{evo.name}}</li>
+        </ol>
+        
 
     </div>
 </div>

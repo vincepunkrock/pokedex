@@ -38,7 +38,6 @@ export class AppComponent {
   pokemonSelected(selectedPokemon: Pokemon) {
     this.store.dispatch(selectPokemon({pokemon: selectedPokemon}));
     this.pokeapiService.getPokemonFromUrl(selectedPokemon.url).subscribe((pokemon) => {
-      console.log(pokemon);
       this.store.dispatch(selectPokemon({ pokemon }));
     });
   }

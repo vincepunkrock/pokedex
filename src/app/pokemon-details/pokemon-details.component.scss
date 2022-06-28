@@ -23,3 +23,19 @@
     height: 96px;
     min-height: 96px;
 }
+
+ol {
+    
+    li.current {
+        font-weight: bold;
+    }
+
+    li:hover {
+        cursor: pointer;
+        text-decoration: underline;
+    }
+}
+
+.close-btn:hover {
+    cursor: pointer;
+}

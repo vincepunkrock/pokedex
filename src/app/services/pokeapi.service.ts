@@ -4,9 +4,11 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AbilityDetails } from '../models/abilityDetails.model';
+import { EvolutionChainDetails } from '../models/evolutionChainDetails';
 import { Pokemon } from '../models/pokemon.model';
 import { PokemonDetails } from '../models/pokemonDetails.model';
 import { PokemonListResponse } from '../models/pokemonListResponse.model';
+import { SpeciesDetails } from '../models/speciesDetails.model';
 
 @Injectable({
   providedIn: 'root'
@@ -32,5 +34,13 @@ export class PokeapiService {
 
   getAbilityFromUrl(url: string): Observable<AbilityDetails> {
     return this.http.get<AbilityDetails>(url);
+  }
+
+  getSpeciesFromUrl(url: string): Observable<SpeciesDetails> {
+    return this.http.get<SpeciesDetails>(url);
+  }
+
+  getEvolutionChainFromUrl(url: string): Observable<EvolutionChainDetails> {
+    return this.http.get<EvolutionChainDetails>(url);
   }
 }
