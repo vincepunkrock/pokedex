@@ -2,5 +2,5 @@
   <mat-nav-list>
     <mat-list-item class="pokemon-list-item" *ngFor="let pokemon of pokemons" (click)="select(pokemon)"> <span class="capitalize" [class.selected]="(selectedPokemon$ | async)?.name == pokemon.name">{{pokemon.name}}</span> </mat-list-item>
   </mat-nav-list>
-  <mat-paginator class="paginator" [pageSize]="pageSize" [pageIndex]="pageIndex" [length]="itemCount$ | async" (page)="pageChanged($event)"></mat-paginator>
+  <mat-paginator class="paginator" [pageSize]="pageSize" [pageIndex]="pageIndex" (page)="pageChanged($event)"></mat-paginator>
 </div>

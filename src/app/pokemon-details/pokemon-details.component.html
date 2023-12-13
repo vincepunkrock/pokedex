@@ -1,10 +1,10 @@
 <div class="container">
     <h2 class="capitalize">
-        {{(pokemon$ | async)!.name}}
-        <mat-icon *ngIf="(pokemon$ | async)!.name" class="close-btn" (click)="close()">close</mat-icon>
-        <mat-spinner *ngIf="(pokemon$ | async)!.name && !(pokemon$ | async)?.details" class="spinner" diameter="20"></mat-spinner>
+        {{(pokemon$ | async)?.name}}
+        <mat-icon *ngIf="(pokemon$ | async)?.name" class="close-btn" (click)="close()">close</mat-icon>
+        <mat-spinner *ngIf="(pokemon$ | async)?.name && !(pokemon$ | async)?.details" class="spinner" diameter="20"></mat-spinner>
         <mat-chip-list *ngIf="(pokemon$ | async)?.details">
-            <mat-chip *ngFor="let t of (pokemon$ | async)!.details!.types">{{t.type.name}}</mat-chip>
+            <mat-chip *ngFor="let t of (pokemon$ | async)!.details!.types">{{t.type?.name}}</mat-chip>
         </mat-chip-list>
     </h2>
 
@@ -31,7 +31,7 @@
             <!-- Name Column -->
             <ng-container matColumnDef="name">
                 <th mat-header-cell *matHeaderCellDef> Name </th>
-                <td class="abilities-name-cell" mat-cell *matCellDef="let element"><b class="capitalize">{{element.name}}</b></td>
+                <td class="abilities-name-cell" mat-cell *matCellDef="let element"><b class="capitalize">{{element?.name}}</b></td>
             </ng-container>
 
             <!-- Effect Column -->
@@ -47,7 +47,7 @@
         <br><br>
         <h3>Evolution Chain</h3>
         <ol>
-            <li *ngFor="let evo of evolutions" (click)="select(evo)" class="capitalize" [class.current]="evo.name == (pokemon$ | async)!.name">{{evo.name}}</li>
+            <li *ngFor="let evo of evolutions" (click)="select(evo)" class="capitalize" [class.current]="evo?.name == (pokemon$ | async)!.name">{{evo?.name}}</li>
         </ol>
         
 
