@@ -3,6 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { PokemonDetailsComponent } from './pokemon-details.component';
 import { HttpClient, HttpHandler } from '@angular/common/http';
 import { provideMockStore } from '@ngrx/store/testing';
+import { PokeapiService } from '../services/pokeapi.service';
 
 describe('PokemonDetailsComponent', () => {
   let component: PokemonDetailsComponent;
@@ -14,7 +15,8 @@ describe('PokemonDetailsComponent', () => {
       providers: [
         provideMockStore({}),
         HttpClient,
-        HttpHandler
+        HttpHandler,
+        PokeapiService
       ]
     })
     .compileComponents();

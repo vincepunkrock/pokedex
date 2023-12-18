@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PokemonListComponent } from './pokemon-list.component';
 import { provideMockStore } from '@ngrx/store/testing';
+import { PokeapiService } from '../services/pokeapi.service';
 
 describe('PokemonListComponent', () => {
   let component: PokemonListComponent;
@@ -11,7 +12,8 @@ describe('PokemonListComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ PokemonListComponent ],
       providers: [
-        provideMockStore({})
+        provideMockStore({}),
+        PokeapiService
       ]
     })
     .compileComponents();

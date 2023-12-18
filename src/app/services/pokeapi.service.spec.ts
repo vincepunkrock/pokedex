@@ -10,7 +10,8 @@ describe('PokeapiService', () => {
     TestBed.configureTestingModule({
       providers: [
         HttpClient,
-        HttpHandler
+        HttpHandler,
+        PokeapiService
       ]
     });
     service = TestBed.inject(PokeapiService);

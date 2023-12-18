@@ -3,6 +3,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { provideMockStore } from '@ngrx/store/testing';
+import { PokeapiService } from './services/pokeapi.service';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
@@ -15,7 +16,8 @@ describe('AppComponent', () => {
         AppComponent
       ],
       providers: [
-        provideMockStore({})
+        provideMockStore({}),
+        PokeapiService
       ]
     }).compileComponents();
   });
