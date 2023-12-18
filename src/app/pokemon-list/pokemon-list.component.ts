@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { LegacyPageEvent as PageEvent } from '@angular/material/legacy-paginator';
+import { PageEvent } from '@angular/material/paginator';
 import { Store } from '@ngrx/store';
 import { Pokemon } from '../models/pokemon.model';
 import { getItemCount } from '../selectors/list.selectors';
