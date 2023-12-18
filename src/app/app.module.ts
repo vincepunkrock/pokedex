@@ -12,12 +12,12 @@ import { pokemonReducer } from './reducers/pokemon.reducer';
 import { pokemonsReducer } from './reducers/pokemons.reducer';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { MatListModule } from '@angular/material/list';
-import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatLegacyListModule as MatListModule } from '@angular/material/legacy-list';
+import { MatLegacyPaginatorModule as MatPaginatorModule } from '@angular/material/legacy-paginator';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatChipsModule } from '@angular/material/chips';
-import { MatTableModule } from '@angular/material/table';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatLegacyChipsModule as MatChipsModule } from '@angular/material/legacy-chips';
+import { MatLegacyTableModule as MatTableModule } from '@angular/material/legacy-table';
+import { MatLegacyProgressSpinnerModule as MatProgressSpinnerModule } from '@angular/material/legacy-progress-spinner';
 import { MatIconModule } from '@angular/material/icon';
 import { AppState } from './app.state';
 import { listReducer } from './reducers/list.reducer';
