@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, effect } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { selectPokemons } from './selectors/pokemons.selectors';
 import { getNextUrl, getPreviousUrl, getUrl } from './selectors/list.selectors';
@@ -16,15 +16,18 @@ import { take } from 'rxjs/operators';
 })
 export class AppComponent {
   title = "Pokedex";
-  pokemons$ = this.store.select(selectPokemons);
+  pokemons = this.store.selectSignal(selectPokemons);
+  listUrl = this.store.selectSignal(getUrl);
+  prevUrl = this.store.selectSignal(getPreviousUrl);
+  nextUrl = this.store.selectSignal(getNextUrl);
 
   constructor(
     private pokeapiService: PokeapiService,
     private store: Store
-  ) {}
-
-  ngOnInit() {
-    this.store.select(getUrl).pipe(take(1)).subscribe(url => this.loadPokemonList(url));
+  ) {
+    effect(() => {
+      this.loadPokemonList(this.listUrl());
+    })
   }
 
   loadPokemonList(url: string) {
@@ -45,10 +48,10 @@ export class AppComponent {
 
   changedPage(change: number) {
     if(change == 1) {
-      this.store.select(getNextUrl).pipe(take(1)).subscribe(u => this.loadPokemonList(u));
+      this.loadPokemonList(this.nextUrl());
     }
     else if(change == -1) {
-      this.store.select(getPreviousUrl).pipe(take(1)).subscribe(u => this.loadPokemonList(u));
+      this.loadPokemonList(this.prevUrl());
     }
   }
 }

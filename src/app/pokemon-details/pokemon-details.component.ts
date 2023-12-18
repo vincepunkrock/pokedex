@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, effect } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { forkJoin } from 'rxjs';
 import { selectPokemon } from '../actions/pokemon.actions';
@@ -6,7 +6,7 @@ import { AbilityDetails } from '../models/abilityDetails.model';
 import { EvolutionChainDetails } from '../models/evolutionChainDetails';
 import { Ability } from '../models/pokemonDetails.model';
 import { Pokemon } from '../models/speciesDetails.model';
-import { selectedPokemon } from '../selectors/pokemon.selectors';
+import { getSelectedPokemon } from '../selectors/pokemon.selectors';
 import { PokeapiService } from '../services/pokeapi.service';
 
 @Component({
@@ -14,9 +14,9 @@ import { PokeapiService } from '../services/pokeapi.service';
   templateUrl: './pokemon-details.component.html',
   styleUrls: ['./pokemon-details.component.scss']
 })
-export class PokemonDetailsComponent implements OnInit {
+export class PokemonDetailsComponent {
 
-  pokemon$ = this.store.select(selectedPokemon);
+  pokemon = this.store.selectSignal(getSelectedPokemon);
   
   abilities: AbilityDetails[] = [];
   evolutions: Pokemon[] = [];
@@ -30,17 +30,13 @@ export class PokemonDetailsComponent implements OnInit {
   constructor(
     private pokeapiService: PokeapiService,
     private store: Store
-  ) { }
-
-  ngOnInit(): void {
-
-    this.pokemon$.subscribe((pokemon) => {
-      if(pokemon.details?.abilities.length) {
-        this.loadAbilities(pokemon.details?.abilities);
-        this.loadEvolutionFromSpeciesUrl(pokemon.details?.species.url);
+  ) {
+    effect(() => {
+      if(this.pokemon().details?.abilities.length) {
+        this.loadAbilities(this.pokemon().details?.abilities || []);
+        this.loadEvolutionFromSpeciesUrl(this.pokemon().details?.species.url || "");
       }
     });
-
   }
 
   loadAbilities(abilities: Ability[]) {

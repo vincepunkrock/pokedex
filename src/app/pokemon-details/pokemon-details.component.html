@@ -1,22 +1,22 @@
 <div class="container">
     <h2 class="capitalize">
-        {{(pokemon$ | async)?.name}}
-        <mat-icon *ngIf="(pokemon$ | async)?.name" class="close-btn" (click)="close()">close</mat-icon>
-        <mat-spinner *ngIf="(pokemon$ | async)?.name && !(pokemon$ | async)?.details" class="spinner" diameter="20"></mat-spinner>
-        <mat-chip-listbox *ngIf="(pokemon$ | async)?.details">
-            <mat-chip-option *ngFor="let t of (pokemon$ | async)!.details!.types">{{t.type.name}}</mat-chip-option>
+        {{pokemon().name}}
+        <mat-icon *ngIf="pokemon().name" class="close-btn" (click)="close()">close</mat-icon>
+        <mat-spinner *ngIf="pokemon().name && !pokemon().details" class="spinner" diameter="20"></mat-spinner>
+        <mat-chip-listbox *ngIf="pokemon().details">
+            <mat-chip-option *ngFor="let t of pokemon().details!.types">{{t.type.name}}</mat-chip-option>
         </mat-chip-listbox>
     </h2>
 
-    <div *ngIf="!(pokemon$ | async)?.name">
+    <div *ngIf="!pokemon().name">
         <mat-icon>arrow_back</mat-icon>Please select a Pokemon from the list on the left.
     </div>
 
-    <div *ngIf="(pokemon$ | async)?.details">
+    <div *ngIf="pokemon().details">
         
         <div class="img-div">
-            <img class="pokemon-img" *ngIf="showFront" [src]="(pokemon$ | async)!.details!.sprites!.front_default">
-            <img class="pokemon-img" *ngIf="!showFront" [src]="(pokemon$ | async)!.details!.sprites!.back_default">
+            <img class="pokemon-img" *ngIf="showFront" [src]="pokemon()!.details!.sprites!.front_default">
+            <img class="pokemon-img" *ngIf="!showFront" [src]="pokemon()!.details!.sprites!.back_default">
             <br>
             <span>
                 <mat-icon (click)="rotate()" title="Rotate">360</mat-icon>
@@ -47,7 +47,7 @@
         <br><br>
         <h3>Evolution Chain</h3>
         <ol>
-            <li *ngFor="let evo of evolutions" (click)="select(evo)" class="capitalize" [class.current]="evo?.name == (pokemon$ | async)!.name">{{evo?.name}}</li>
+            <li *ngFor="let evo of evolutions" (click)="select(evo)" class="capitalize" [class.current]="evo?.name == pokemon()!.name">{{evo?.name}}</li>
         </ol>
         
 

@@ -3,7 +3,7 @@ import { PageEvent } from '@angular/material/paginator';
 import { Store } from '@ngrx/store';
 import { Pokemon } from '../models/pokemon.model';
 import { getItemCount } from '../selectors/list.selectors';
-import { selectedPokemon } from '../selectors/pokemon.selectors';
+import { getSelectedPokemon } from '../selectors/pokemon.selectors';
 
 @Component({
   selector: 'app-pokemon-list',
@@ -18,8 +18,8 @@ export class PokemonListComponent implements OnInit {
 
   pageSize: number = 150;
   pageIndex: number = 0;
-  itemCount$ = this.store.select(getItemCount);
-  selectedPokemon$ = this.store.select(selectedPokemon);
+  itemCount = this.store.selectSignal(getItemCount);
+  selectedPokemon = this.store.selectSignal(getSelectedPokemon);
 
   constructor(
     private store: Store
