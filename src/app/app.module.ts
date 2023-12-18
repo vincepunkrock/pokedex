@@ -21,6 +21,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatIconModule } from '@angular/material/icon';
 import { AppState } from './app.state';
 import { listReducer } from './reducers/list.reducer';
+import { PokeapiService } from './services/pokeapi.service';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,7 @@ import { listReducer } from './reducers/list.reducer';
     MatProgressSpinnerModule,
     MatIconModule
   ],
-  providers: [],
+  providers: [PokeapiService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

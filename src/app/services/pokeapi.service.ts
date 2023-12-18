@@ -10,9 +10,7 @@ import { PokemonDetails } from '../models/pokemonDetails.model';
 import { PokemonListResponse } from '../models/pokemonListResponse.model';
 import { SpeciesDetails } from '../models/speciesDetails.model';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class PokeapiService {
 
   constructor(private http: HttpClient) {}
