@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output, effect } from '@angular/core';
+import { Component, EventEmitter, Output, effect, signal } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { forkJoin } from 'rxjs';
 import { selectPokemon } from '../actions/pokemon.actions';
@@ -18,8 +18,8 @@ export class PokemonDetailsComponent {
 
   pokemon = this.store.selectSignal(getSelectedPokemon);
   
-  abilities: AbilityDetails[] = [];
-  evolutions: Pokemon[] = [];
+  abilities = signal<AbilityDetails[]>([]);
+  evolutions = signal<Pokemon[]>([]);
   displayedColumns = ['name', 'effect_entries'];
 
   loading: boolean = false;
@@ -42,11 +42,10 @@ export class PokemonDetailsComponent {
   loadAbilities(abilities: Ability[]) {
 
     this.loading = true;
-    this.abilities = [];
     forkJoin(
       abilities.map(a => this.pokeapiService.getAbilityFromUrl(a.ability.url))
     ).subscribe(res => {
-      this.abilities = res;
+      this.abilities.set(res);
       this.loading = false;
     });
 
@@ -54,14 +53,13 @@ export class PokemonDetailsComponent {
 
   loadEvolutionFromSpeciesUrl(url: string) {
 
-    this.evolutions = [];
     this.pokeapiService.getSpeciesFromUrl(url).subscribe(speciesDetails => {
       this.pokeapiService.getEvolutionChainFromUrl(speciesDetails.evolution_chain.url).subscribe(evolutionChain => {
         const evolutions = this.getEvolutions(evolutionChain);
         forkJoin(
           evolutions.map(e => this.pokeapiService.getSpeciesFromUrl(e.url))
         ).subscribe(evolutionSpecies => {
-          this.evolutions = evolutionSpecies.map(es => es.varieties[0].pokemon);
+          this.evolutions.set(evolutionSpecies.map(es => es.varieties[0].pokemon));
         });
       });
     });

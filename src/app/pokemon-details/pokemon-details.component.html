@@ -26,7 +26,7 @@
 
         <br><br>
         <h3>Abilities <mat-spinner *ngIf="loading" class="spinner" diameter="20"></mat-spinner></h3>
-        <table *ngIf="abilities" mat-table [dataSource]="abilities">
+        <table *ngIf="abilities().length > 0" mat-table [dataSource]="abilities()">
 
             <!-- Name Column -->
             <ng-container matColumnDef="name">
@@ -47,7 +47,7 @@
         <br><br>
         <h3>Evolution Chain</h3>
         <ol>
-            <li *ngFor="let evo of evolutions" (click)="select(evo)" class="capitalize" [class.current]="evo?.name == pokemon()!.name">{{evo?.name}}</li>
+            <li *ngFor="let evo of evolutions()" (click)="select(evo)" class="capitalize" [class.current]="evo?.name == pokemon()!.name">{{evo?.name}}</li>
         </ol>
         
 
